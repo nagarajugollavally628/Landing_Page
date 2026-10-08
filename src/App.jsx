@@ -476,6 +476,7 @@ export default function App() {
   const [loginType, setLoginType] = useState("student");
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   const [selectedDemoCourse, setSelectedDemoCourse] = useState("AP DSC 2026 (SGT / SA)");
+  const [mobileExamTab, setMobileExamTab] = useState("upcoming");
 
   // Demo Form State
   const [demoForm, setDemoForm] = useState({
@@ -490,10 +491,15 @@ export default function App() {
   useEffect(() => {
     AOS.init({
       duration: 750,
-      once: true,
+      once: false,
       easing: "ease-out-cubic",
-      offset: 40,
+      offset: 20,
+      disable: false,
+      disableMutationObserver: false,
     });
+    setTimeout(() => {
+      AOS.refresh();
+    }, 300);
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
@@ -538,18 +544,18 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white text-[#1a1a2e] antialiased selection:bg-[#FFD700] selection:text-[#003366] pb-16 md:pb-0">
+    <div className="relative min-h-screen bg-white text-[#1a1a2e] antialiased selection:bg-[#FFD700] selection:text-[#003366] pb-0">
       {/* =========================================================================
           TOP NOTIFICATION BAR (PDF Page 1 Style)
       ========================================================================= */}
       <div className="bg-[#002244] text-slate-100 text-xs py-2 px-4 border-b border-blue-950/80">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-2 text-center sm:text-left">
-            <span className="bg-[#FFD700] text-[#003366] font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider flex-shrink-0">
+            {/* <span className="bg-[#FFD700] text-[#003366] font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider flex-shrink-0">
               Exam update
-            </span>
+            </span> */}
             <span className="text-slate-200 font-medium truncate">
-              AP DSC 2026 notification expected on 15 October · Exam planned for December · New offline batches starting at all 3 branches
+              AP DSC 2026 notification expected on 15 October ·
             </span>
           </div>
           <div className="flex items-center gap-4 font-semibold flex-shrink-0">
@@ -615,63 +621,63 @@ export default function App() {
                 Offline coaching for AP DSC, TET, Police SI/Constable, Banking, SSC and Railway exams, with teachers you can meet every day in Chittoor, Tirupati and Palamaner.
               </p>
 
-              {/* 4 Stat Badges from PDF Page 1 */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-2">
-                <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-[#FFD700] font-serif">
+              {/* 4 Stat Badges - COMPACT 4-COL GRID ON MOBILE WITHOUT SCROLLING */}
+              <div className="grid grid-cols-4 gap-1.5 sm:gap-4 pt-2">
+                <div data-aos="zoom-in" data-aos-delay="100" className="bg-white/10 backdrop-blur-md p-2 sm:p-3.5 rounded-xl border border-white/15 text-center shadow-md">
+                  <div className="text-base sm:text-3xl font-extrabold text-[#FFD700] font-serif">
                     14
                   </div>
-                  <div className="text-xs text-slate-300 mt-0.5 leading-snug">
-                    years of coaching
+                  <div className="text-[9px] sm:text-xs text-slate-300 mt-0.5 leading-tight">
+                    years coaching
                   </div>
                 </div>
 
-                <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-[#FFD700] font-serif">
+                <div data-aos="zoom-in" data-aos-delay="150" className="bg-white/10 backdrop-blur-md p-2 sm:p-3.5 rounded-xl border border-white/15 text-center shadow-md">
+                  <div className="text-base sm:text-3xl font-extrabold text-[#FFD700] font-serif">
                     2,000+
                   </div>
-                  <div className="text-xs text-slate-300 mt-0.5 leading-snug">
-                    government job selections
+                  <div className="text-[9px] sm:text-xs text-slate-300 mt-0.5 leading-tight">
+                    job selections
                   </div>
                 </div>
 
-                <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-[#FFD700] font-serif">
+                <div data-aos="zoom-in" data-aos-delay="200" className="bg-white/10 backdrop-blur-md p-2 sm:p-3.5 rounded-xl border border-white/15 text-center shadow-md">
+                  <div className="text-base sm:text-3xl font-extrabold text-[#FFD700] font-serif">
                     80+
                   </div>
-                  <div className="text-xs text-slate-300 mt-0.5 leading-snug">
-                    experienced faculty
+                  <div className="text-[9px] sm:text-xs text-slate-300 mt-0.5 leading-tight">
+                    faculty members
                   </div>
                 </div>
 
-                <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-[#FFD700] font-serif">
+                <div data-aos="zoom-in" data-aos-delay="250" className="bg-white/10 backdrop-blur-md p-2 sm:p-3.5 rounded-xl border border-white/15 text-center shadow-md">
+                  <div className="text-base sm:text-3xl font-extrabold text-[#FFD700] font-serif">
                     3
                   </div>
-                  <div className="text-xs text-slate-300 mt-0.5 leading-snug">
-                    branches near you
+                  <div className="text-[9px] sm:text-xs text-slate-300 mt-0.5 leading-tight">
+                    branches
                   </div>
                 </div>
               </div>
 
-              {/* Action Buttons & Counsellor Reassurance */}
+              {/* Action Buttons Side-by-Side on Mobile */}
               <div className="pt-2 space-y-3">
-                <div className="flex flex-wrap gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
                   <a
                     href="#free-demo-form"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold text-[#003366] bg-[#FFD700] hover:bg-[#ffcf00] rounded-xl shadow-lg transition transform hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 py-3 sm:px-6 sm:py-3.5 text-xs sm:text-sm font-bold text-[#003366] bg-[#FFD700] hover:bg-[#ffcf00] rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center"
                   >
-                    <span>Book a free demo class</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>Book free demo</span>
+                    <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
                   </a>
                   <a
                     href="https://whatsapp.com/channel/0029Vb7cuGkJpe8fmTHIMy2y"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-lg transition transform hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 py-3 sm:px-6 sm:py-3.5 text-xs sm:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center"
                   >
-                    <WhatsAppIcon className="w-4 h-4" />
-                    <span>Chat on WhatsApp</span>
+                    <WhatsAppIcon className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>WhatsApp</span>
                   </a>
                 </div>
                 <p className="text-xs text-slate-300 font-medium">
@@ -921,13 +927,22 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          {/* Mobile Horizontal Swipe Indicator */}
+          <div className="md:hidden flex items-center justify-between text-xs text-[#003366] font-bold mb-3 px-1">
+            <span className="flex items-center gap-1.5 bg-amber-100/90 px-2.5 py-1 rounded-full text-amber-900 border border-amber-200">
+              <Sparkles className="w-3.5 h-3.5 text-[#003366]" />
+              <span>Swipe pathways ➔</span>
+            </span>
+            <span className="text-xs text-slate-400 font-normal">4 Programs</span>
+          </div>
+
+          <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-4 mb-20">
             {PROGRAM_CARDS.map((prog, idx) => (
               <div
                 key={prog.id}
-                data-aos="zoom-in"
+                data-aos="fade-left"
                 data-aos-delay={idx * 100}
-                className="bg-white rounded-2xl overflow-hidden border-b-4 border-[#003366] shadow-md hover:shadow-2xl transition-all duration-400 flex flex-col justify-between group hover:-translate-y-2"
+                className="snap-center flex-shrink-0 w-[84vw] max-w-[320px] md:w-auto bg-white rounded-2xl overflow-hidden border-b-4 border-[#003366] shadow-md hover:shadow-2xl transition-all duration-400 flex flex-col justify-between group hover:-translate-y-2"
               >
                 <div className="h-48 overflow-hidden bg-slate-100 relative">
                   <img
@@ -946,7 +961,7 @@ export default function App() {
                     <h4 className="font-serif text-base font-bold text-[#003366] mt-1 group-hover:text-amber-700 transition-colors">
                       {prog.title}
                     </h4>
-                    <p className="text-xs text-slate-600 mt-1.5 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
                       {prog.description}
                     </p>
                   </div>
@@ -976,13 +991,22 @@ export default function App() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Mobile Horizontal Swipe Indicator */}
+            <div className="md:hidden flex items-center justify-between text-xs text-[#003366] font-bold mb-3 px-1">
+              <span className="flex items-center gap-1.5 bg-blue-100/90 px-2.5 py-1 rounded-full text-[#003366] border border-blue-200">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Swipe courses ➔</span>
+              </span>
+              <span className="text-xs text-slate-400 font-normal">6 Courses</span>
+            </div>
+
+            <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3">
               {EXAM_CARDS.map((exam, idx) => (
                 <div
                   key={exam.id}
                   data-aos="fade-up"
                   data-aos-delay={idx * 80}
-                  className={`bg-white rounded-2xl p-6 sm:p-7 border transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1 ${
+                  className={`snap-center flex-shrink-0 w-[88vw] max-w-[340px] md:w-auto bg-white rounded-2xl p-6 sm:p-7 border transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1 ${
                     exam.id === "dsc-2026"
                       ? "border-[#003366] ring-2 ring-[#003366]/10"
                       : "border-slate-200/90"
@@ -1049,15 +1073,24 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {/* Mobile Horizontal Swipe Indicator */}
+          <div className="md:hidden flex items-center justify-between text-xs text-[#003366] font-bold mb-3 px-1">
+            <span className="flex items-center gap-1.5 bg-amber-100/90 px-2.5 py-1 rounded-full text-amber-900 border border-amber-200">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Swipe advantages ➔</span>
+            </span>
+            <span className="text-xs text-slate-400 font-normal">6 Features</span>
+          </div>
+
+          <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {WHY_CHOOSE_KUTTY.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  data-aos="fade-up"
+                  data-aos="zoom-in"
                   data-aos-delay={idx * 90}
-                  className="bg-[#f8f9fa] rounded-2xl p-7 border border-slate-200/80 hover:border-[#003366] shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group"
+                  className="snap-center flex-shrink-0 w-[84vw] max-w-[320px] md:w-auto bg-[#f8f9fa] rounded-2xl p-7 border border-slate-200/80 hover:border-[#003366] shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group"
                 >
                   <div>
                     <div className="w-12 h-12 rounded-xl bg-[#003366] text-[#FFD700] flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 transition-transform">
@@ -1085,7 +1118,7 @@ export default function App() {
       </section>
 
       {/* =========================================================================
-          SECTION 4: HOW JOINING WORKS (VERTICAL TIMELINE - REQUESTED BY USER)
+          SECTION 4: HOW JOINING WORKS (STEP PROCESS)
       ========================================================================= */}
       <section
         id="how-joining-works"
@@ -1093,65 +1126,67 @@ export default function App() {
       >
         {/* Decorative background glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#FFD700] bg-white/10 px-3.5 py-1.5 rounded-full border border-white/20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-14" data-aos="fade-up">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#FFD700] bg-white/10 px-4 py-1.5 rounded-full border border-white/20">
               Simple 4-Step Process
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3">
               How joining works
             </h2>
-            <p className="mt-3 text-slate-300 text-base sm:text-lg">
+            <p className="mt-3 text-slate-300 text-base sm:text-lg max-w-xl mx-auto">
               Four simple steps. You decide only after you&apos;ve sat in a real class.
             </p>
           </div>
 
-          {/* VERTICAL TIMELINE LAYOUT */}
+          {/* TIMELINE STEP CARDS - VERTICAL STACK ON MOBILE, EXPANSIVE FULL DECENT WIDTH ON DESKTOP */}
           <div className="relative">
-            {/* Connected Vertical Timeline Line */}
-            <div className="absolute left-6 sm:left-8 top-8 bottom-8 w-1 bg-gradient-to-b from-[#FFD700] via-blue-400 to-[#FFD700] rounded-full hidden sm:block" />
+            {/* Connected Vertical Timeline Line (for tablet & desktop) */}
+            <div className="absolute left-7 md:left-9 top-8 bottom-8 w-1 bg-gradient-to-b from-[#FFD700] via-blue-400 to-[#FFD700] rounded-full hidden md:block" />
 
-            <div className="space-y-6 sm:space-y-8">
+            <div className="flex flex-col space-y-5 md:space-y-8 w-full">
               {HOW_JOINING_WORKS_STEPS.map((step, idx) => {
                 const StepIcon = step.icon;
                 return (
                   <div
                     key={step.step}
                     data-aos="fade-up"
-                    data-aos-delay={idx * 120}
-                    className="relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6 bg-[#002850]/90 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-white/15 hover:border-[#FFD700]/70 transition-all shadow-lg hover:shadow-2xl"
+                    data-aos-delay={idx * 100}
+                    className="w-full relative flex flex-col md:flex-row items-start gap-4 md:gap-6 bg-[#002850]/90 backdrop-blur-md rounded-2xl p-6 sm:p-7 md:p-8 border border-white/15 hover:border-[#FFD700]/70 transition-all shadow-xl hover:shadow-2xl group"
                   >
-                    {/* Glowing Step Number Badge Node */}
-                    <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#FFD700] text-[#003366] flex flex-col items-center justify-center font-extrabold shadow-xl z-10">
-                      <span className="text-xs uppercase font-sans tracking-tight">Step</span>
+                    {/* Step Number Badge Node */}
+                    <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#FFD700] text-[#003366] flex flex-col items-center justify-center font-extrabold shadow-xl z-10 group-hover:scale-105 transition-transform">
+                      <span className="text-[10px] sm:text-xs uppercase font-sans tracking-tight">Step</span>
                       <span className="text-xl sm:text-2xl font-serif leading-none">{step.step}</span>
                     </div>
 
                     {/* Step Content */}
-                    <div className="flex-1">
-                      <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                        <h3 className="font-serif text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                    <div className="flex-1 w-full">
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <h3 className="font-serif text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
                           <StepIcon className="w-5 h-5 text-[#FFD700]" />
                           <span>{step.title}</span>
                         </h3>
-                        <span className="text-xs font-bold text-[#FFD700] bg-white/10 px-3 py-1 rounded-full border border-white/10">
+                        <span className="text-xs font-bold text-[#FFD700] bg-white/10 px-3 py-1 rounded-full border border-white/15">
                           {step.badge}
                         </span>
                       </div>
 
-                      <p className="text-sm sm:text-base text-slate-200 mt-1 leading-relaxed">
+                      <p className="text-sm sm:text-base text-slate-200 mt-2 leading-relaxed">
                         {step.desc}
                       </p>
 
-                      <div className="mt-4 flex items-center gap-3">
+                      <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between">
                         <button
                           onClick={() => scrollToSection("free-demo-form")}
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FFD700] hover:text-white transition"
+                          className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#FFD700] hover:text-white transition group-hover:translate-x-1"
                         >
                           <span>{step.actionText}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-4 h-4" />
                         </button>
+                        <span className="text-[11px] text-slate-400 font-medium">Step {step.step} of 4</span>
                       </div>
                     </div>
                   </div>
@@ -1161,7 +1196,7 @@ export default function App() {
           </div>
 
           {/* Bottom Step Call to Action */}
-          <div className="mt-12 text-center">
+          <div className="mt-12 text-center" data-aos="fade-up">
             <button
               onClick={() => scrollToSection("free-demo-form")}
               className="inline-flex items-center gap-2 px-8 py-4 bg-[#FFD700] hover:bg-[#ffcf00] text-[#003366] font-extrabold text-sm sm:text-base rounded-full shadow-2xl transition transform hover:scale-105"
@@ -1212,7 +1247,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Content / Editorial Quote */}
             <div data-aos="fade-right" className="lg:col-span-7">
-              <div className="font-serif text-8xl md:text-9xl text-[#003366] leading-none select-none opacity-70 -mb-10 -ml-2">
+              <div className="font-serif text-7xl sm:text-8xl md:text-9xl text-[#003366] leading-none select-none opacity-70 -mb-8 sm:-mb-10 ml-0">
                 “
               </div>
 
@@ -1325,9 +1360,35 @@ export default function App() {
             </p>
           </div>
 
+          {/* Mobile Tab Switcher for Exams vs Notifications */}
+          <div className="md:hidden flex bg-slate-100 p-1.5 rounded-xl mb-6 shadow-inner gap-1">
+            <button
+              onClick={() => setMobileExamTab("upcoming")}
+              className={`flex-1 py-2.5 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
+                mobileExamTab === "upcoming"
+                  ? "bg-[#FFD700] text-[#003366] shadow-md"
+                  : "text-slate-600 hover:text-[#003366]"
+              }`}
+            >
+              <Calendar className="w-3.5 h-3.5" />
+              <span>Upcoming Exams</span>
+            </button>
+            <button
+              onClick={() => setMobileExamTab("notifications")}
+              className={`flex-1 py-2.5 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
+                mobileExamTab === "notifications"
+                  ? "bg-[#003366] text-white shadow-md"
+                  : "text-slate-600 hover:text-[#003366]"
+              }`}
+            >
+              <Bell className="w-3.5 h-3.5 text-[#FFD700]" />
+              <span>Notifications</span>
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.12)]">
             {/* Left: Yellow Column (#FFD700) */}
-            <div className="bg-[#FFD700] p-8 sm:p-10 flex flex-col justify-between">
+            <div className={`bg-[#FFD700] p-6 sm:p-10 flex flex-col justify-between ${mobileExamTab === "notifications" ? "hidden md:flex" : "flex"}`}>
               <div>
                 <div className="flex items-center justify-between border-b border-black/15 pb-4 mb-6">
                   <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#003366]">
@@ -1374,7 +1435,7 @@ export default function App() {
             </div>
 
             {/* Right: Navy Column (#003366) */}
-            <div className="bg-[#003366] p-8 sm:p-10 text-white flex flex-col justify-between">
+            <div className={`bg-[#003366] p-6 sm:p-10 text-white flex flex-col justify-between ${mobileExamTab === "upcoming" ? "hidden md:flex" : "flex"}`}>
               <div>
                 <div className="flex items-center justify-between border-b border-white/20 pb-4 mb-6">
                   <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#FFD700]">
@@ -1464,7 +1525,7 @@ export default function App() {
                   {/* Content block — animates in/out */}
                   <div className={`gallery-carousel-content ${activeGalleryIndex === idx ? "gallery-carousel-content--visible" : ""}`}>
                     <span className="gallery-carousel-tag">Kutty Study Circle</span>
-                    <h3 className="gallery-carousel-title">{photo.title}</h3>
+                    <h3 className="gallery-carousel-[#003366] gallery-carousel-title">{photo.title}</h3>
                     <p className="gallery-carousel-subtitle">{photo.subtitle}</p>
                     <button
                       onClick={() => setLightboxImg(photo.url)}
@@ -1571,13 +1632,22 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Mobile Horizontal Swipe Indicator */}
+          <div className="md:hidden flex items-center justify-between text-xs text-[#003366] font-bold mb-3 px-1">
+            <span className="flex items-center gap-1.5 bg-amber-100/90 px-2.5 py-1 rounded-full text-amber-900 border border-amber-200">
+              <Star className="w-3.5 h-3.5 fill-current text-amber-500" />
+              <span>Swipe achievers ➔</span>
+            </span>
+            <span className="text-xs text-slate-400 font-normal">2,000+ Jobs</span>
+          </div>
+
+          <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-3 gap-8">
             {SUCCESS_STORIES.map((story, idx) => (
               <div
                 key={idx}
-                data-aos="fade-up"
+                data-aos="fade-left"
                 data-aos-delay={idx * 150}
-                className="bg-[#f8f9fa] rounded-2xl p-7 border border-slate-200/80 hover:border-[#FFD700] shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
+                className="snap-center flex-shrink-0 w-[85vw] max-w-[320px] md:w-auto bg-[#f8f9fa] rounded-2xl p-7 border border-slate-200/80 hover:border-[#FFD700] shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center gap-4 mb-4">
@@ -1628,12 +1698,22 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {STUDY_MATERIALS_DATA.map((mat) => (
+          {/* Mobile Horizontal Swipe Indicator */}
+          <div className="md:hidden flex items-center justify-between text-xs text-[#003366] font-bold mb-3 px-1">
+            <span className="flex items-center gap-1.5 bg-blue-100/90 px-2.5 py-1 rounded-full text-[#003366] border border-blue-200">
+              <FileText className="w-3.5 h-3.5" />
+              <span>Swipe materials ➔</span>
+            </span>
+            <span className="text-xs text-slate-400 font-normal">Syllabus PDFs</span>
+          </div>
+
+          <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {STUDY_MATERIALS_DATA.map((mat, idx) => (
               <div
                 key={mat.id}
-                data-aos="fade-up"
-                className="bg-white rounded-xl p-6 border border-slate-200/80 hover:border-[#003366] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between group"
+                data-aos="zoom-in"
+                data-aos-delay={idx * 100}
+                className="snap-center flex-shrink-0 w-[85vw] max-w-[320px] md:w-auto bg-white rounded-xl p-6 border border-slate-200/80 hover:border-[#003366] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -1688,86 +1768,88 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div className="grid grid-cols-3 gap-1.5 sm:gap-6 text-center">
             {/* Tirupati */}
-            <div className="bg-[#f8f9fa] rounded-2xl p-6 border border-slate-200 hover:border-[#003366] shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
+            <div data-aos="fade-up" data-aos-delay="100" className="bg-[#f8f9fa] rounded-xl sm:rounded-2xl p-2.5 sm:p-6 border border-slate-200 hover:border-[#003366] shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
               <div>
-                <h4 className="font-serif text-2xl font-bold text-[#003366] mb-1">Tirupati</h4>
-                <div className="text-xs text-slate-600 leading-relaxed mt-2">
-                  Plot No 1, Door No 23-8-160, AIR Bypass Road,<br />
-                  New Balaji Colony, MR Palle Circle (upstairs),<br />
+                <h4 className="font-serif text-sm sm:text-2xl font-bold text-[#003366] mb-0.5 sm:mb-1">Tirupati</h4>
+                <div className="text-[9px] sm:text-xs text-slate-600 leading-tight mt-1">
+                  AIR Bypass Road,<br className="hidden sm:inline" />
+                  MR Palle Circle,<br />
                   Tirupati 517502
                 </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-200 flex flex-col gap-2">
+              <div className="mt-3 pt-2 sm:mt-6 sm:pt-4 border-t border-slate-200 flex flex-col gap-1 sm:gap-2">
                 <a
                   href="https://maps.google.com/?q=Plot+No+1,+Door+No+23-8-160,+AIR+Bypass+Road,+New+Balaji+Colony,+MR+Palle+Circle,+Tirupati,+Andhra+Pradesh+517502"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-2 px-3 text-xs font-bold text-[#003366] border border-[#003366] rounded-lg hover:bg-blue-50 transition"
+                  className="py-1 px-1 sm:py-2 sm:px-3 text-[9px] sm:text-xs font-bold text-[#003366] border border-[#003366] rounded-md sm:rounded-lg hover:bg-blue-50 transition text-center truncate"
                 >
                   Directions
                 </a>
                 <a
                   href="tel:9491844963"
-                  className="py-2 px-3 text-xs font-bold text-white bg-[#003366] rounded-lg hover:bg-[#002244] transition flex items-center justify-center gap-1.5"
+                  className="py-1 px-1 sm:py-2 sm:px-3 text-[9px] sm:text-xs font-bold text-white bg-[#003366] rounded-md sm:rounded-lg hover:bg-[#002244] transition flex items-center justify-center gap-1 truncate"
                 >
-                  <Phone className="w-3.5 h-3.5" /> Call 94918 44963
+                  <Phone className="w-3 h-3 flex-shrink-0" /> Call
                 </a>
               </div>
             </div>
 
             {/* Chittoor (Head office) */}
-            <div className="bg-[#f8f9fa] rounded-2xl p-6 border-2 border-[#FFD700] shadow-md hover:shadow-xl transition-all flex flex-col justify-between relative">
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#FFD700] text-[#003366] text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider">
+            <div data-aos="fade-up" data-aos-delay="200" className="bg-[#f8f9fa] rounded-xl sm:rounded-2xl p-2.5 sm:p-6 border-2 border-[#FFD700] shadow-md hover:shadow-xl transition-all flex flex-col justify-between relative">
+              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#FFD700] text-[#003366] text-[8px] sm:text-[10px] font-extrabold px-1.5 py-0.5 sm:px-3 rounded-full uppercase tracking-wider whitespace-nowrap">
                 Head Office
               </span>
               <div>
-                <h4 className="font-serif text-2xl font-bold text-[#003366] mb-1">Chittoor</h4>
-                <div className="text-xs text-slate-600 leading-relaxed mt-2">
+                <h4 className="font-serif text-sm sm:text-2xl font-bold text-[#003366] mb-0.5 sm:mb-1">Chittoor</h4>
+                <div className="text-[9px] sm:text-xs text-slate-600 leading-tight mt-1">
                   26-111, Mittoor,<br />
-                  Chittoor, Andhra Pradesh 517001
+                  Chittoor,<br />
+                  AP 517001
                 </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-200 flex flex-col gap-2">
+              <div className="mt-3 pt-2 sm:mt-6 sm:pt-4 border-t border-slate-200 flex flex-col gap-1 sm:gap-2">
                 <a
                   href="https://maps.google.com/?q=26-111,+Mittoor,+Chittoor,+Andhra+Pradesh+517001,+India"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-2 px-3 text-xs font-bold text-[#003366] border border-[#003366] rounded-lg hover:bg-blue-50 transition"
+                  className="py-1 px-1 sm:py-2 sm:px-3 text-[9px] sm:text-xs font-bold text-[#003366] border border-[#003366] rounded-md sm:rounded-lg hover:bg-blue-50 transition text-center truncate"
                 >
                   Directions
                 </a>
                 <a
                   href="tel:9491844963"
-                  className="py-2 px-3 text-xs font-bold text-[#003366] bg-[#FFD700] rounded-lg hover:bg-[#ffcf00] transition flex items-center justify-center gap-1.5"
+                  className="py-1 px-1 sm:py-2 sm:px-3 text-[9px] sm:text-xs font-bold text-[#003366] bg-[#FFD700] rounded-md sm:rounded-lg hover:bg-[#ffcf00] transition flex items-center justify-center gap-1 truncate"
                 >
-                  <Phone className="w-3.5 h-3.5" /> Call 94918 44963
+                  <Phone className="w-3 h-3 flex-shrink-0" /> Call
                 </a>
               </div>
             </div>
 
             {/* Palamaner */}
-            <div className="bg-[#f8f9fa] rounded-2xl p-6 border border-slate-200 hover:border-[#003366] shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
+            <div data-aos="fade-up" data-aos-delay="300" className="bg-[#f8f9fa] rounded-xl sm:rounded-2xl p-2.5 sm:p-6 border border-slate-200 hover:border-[#003366] shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
               <div>
-                <h4 className="font-serif text-2xl font-bold text-[#003366] mb-1">Palamaner</h4>
-                <div className="text-xs text-slate-600 leading-relaxed mt-2">
-                  Palamaner Town Center,<br />
-                  Chittoor District, Andhra Pradesh
+                <h4 className="font-serif text-sm sm:text-2xl font-bold text-[#003366] mb-0.5 sm:mb-1">Palamaner</h4>
+                <div className="text-[9px] sm:text-xs text-slate-600 leading-tight mt-1">
+                  Town Center,<br />
+                  Chittoor Dist,<br />
+                  Andhra Pradesh
                 </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-200 flex flex-col gap-2">
+              <div className="mt-3 pt-2 sm:mt-6 sm:pt-4 border-t border-slate-200 flex flex-col gap-1 sm:gap-2">
                 <a
                   href="#contact"
-                  className="py-2 px-3 text-xs font-bold text-[#003366] border border-[#003366] rounded-lg hover:bg-blue-50 transition"
+                  className="py-1 px-1 sm:py-2 sm:px-3 text-[9px] sm:text-xs font-bold text-[#003366] border border-[#003366] rounded-md sm:rounded-lg hover:bg-blue-50 transition text-center truncate"
                 >
                   Directions
                 </a>
                 <a
                   href="tel:9491844963"
-                  className="py-2 px-3 text-xs font-bold text-white bg-[#003366] rounded-lg hover:bg-[#002244] transition flex items-center justify-center gap-1.5"
+                  className="py-1 px-1 sm:py-2 sm:px-3 text-[9px] sm:text-xs font-bold text-white bg-[#003366] rounded-md sm:rounded-lg hover:bg-[#002244] transition flex items-center justify-center gap-1 truncate"
                 >
-                  <Phone className="w-3.5 h-3.5" /> Call 94918 44963
+                  <Phone className="w-3 h-3 flex-shrink-0" /> Call
                 </a>
               </div>
             </div>
@@ -1795,18 +1877,18 @@ export default function App() {
             Attend one free class at your nearest branch before you decide. Seats in each batch are limited to ensure personalized faculty attention.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-4 max-w-md mx-auto sm:max-w-none">
             <button
               onClick={() => scrollToSection("free-demo-form")}
-              className="px-8 py-4 bg-[#FFD700] hover:bg-[#ffcf00] text-[#003366] font-extrabold text-sm sm:text-base rounded-xl shadow-xl transition transform hover:scale-105"
+              className="px-2.5 py-3 sm:px-8 sm:py-4 bg-[#FFD700] hover:bg-[#ffcf00] text-[#003366] font-extrabold text-xs sm:text-base rounded-xl shadow-xl transition transform hover:scale-105 text-center flex items-center justify-center"
             >
-              Book a free demo class
+              Book free demo
             </button>
             <a
               href="tel:9491844963"
-              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white hover:bg-white hover:text-[#003366] text-white font-extrabold text-sm sm:text-base rounded-xl transition transform hover:scale-105"
+              className="inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 py-3 sm:px-8 sm:py-4 border-2 border-white hover:bg-white hover:text-[#003366] text-white font-extrabold text-xs sm:text-base rounded-xl transition transform hover:scale-105 text-center"
             >
-              <Phone className="w-5 h-5 text-[#FFD700]" />
+              <Phone className="w-4 h-4 text-[#FFD700] flex-shrink-0" />
               <span>Call 94918 44963</span>
             </a>
           </div>
@@ -1887,9 +1969,9 @@ export default function App() {
           </div>
         </div>
 
-        {/* Footer Navigation Columns */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          <div className="lg:col-span-1">
+        {/* Footer Navigation Columns - 2 IN A ROW ON MOBILE */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="col-span-2 lg:col-span-1">
             <h4 className="font-serif text-lg font-bold text-white mb-4 gold-bar-accent">
               About
             </h4>
@@ -1985,7 +2067,7 @@ export default function App() {
             <ul className="space-y-2.5 text-xs text-slate-400 mt-6">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#FFD700] flex-shrink-0 mt-0.5" />
-                <span>26-111, Mittoor, Chittoor, Andhra Pradesh 517001</span>
+                <span>26-111, Mittoor, Chittoor, AP 517001</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#FFD700] flex-shrink-0" />
@@ -2020,37 +2102,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-
-      {/* =========================================================================
-          FIXED MOBILE BOTTOM ACTION BAR (From PDF Page 3 & 4)
-      ========================================================================= */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2 flex items-center justify-between gap-2 shadow-[0_-4px_20px_rgba(0,0,0,0.15)] md:hidden">
-        <a
-          href="tel:9491844963"
-          className="flex-1 py-2 px-2.5 rounded-lg border border-slate-300 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-slate-50 transition"
-        >
-          <Phone className="w-3.5 h-3.5 text-[#003366]" />
-          <span>Call</span>
-        </a>
-
-        <a
-          href="https://whatsapp.com/channel/0029Vb7cuGkJpe8fmTHIMy2y"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 py-2 px-2.5 rounded-lg bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-700 transition"
-        >
-          <WhatsAppIcon className="w-3.5 h-3.5" />
-          <span>WhatsApp</span>
-        </a>
-
-        <button
-          onClick={() => scrollToSection("free-demo-form")}
-          className="flex-1 py-2 px-2.5 rounded-lg bg-[#FFD700] text-[#003366] text-xs font-extrabold flex items-center justify-center gap-1 shadow-sm transition"
-        >
-          <span>Book demo</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </button>
-      </div>
 
       {/* =========================================================================
           LIGHTBOX MODAL FOR GALLERY

@@ -17,6 +17,7 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', 'Noto Sans Telugu', 'Open Sans', system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -25,15 +26,81 @@
     padding: 0;
     color: var(--text-dark);
     background-color: #ffffff;
+    width: 100%;
   }
 
   #root {
     width: 100%;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, .font-serif {
     font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+/* ==========================================================================
+   MOBILE UTILITIES, TOUCH SNAP & SCROLLBAR HIDING
+   ========================================================================== */
+
+/* Hide scrollbars for horizontal snap sliders */
+.scrollbar-none::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.scrollbar-none,
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Smooth Touch Snap Scrolling */
+.touch-snap-x {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.touch-snap-card {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
+
+/* Mobile swipe pulse indicator animation */
+@keyframes swipePulse {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+}
+
+.animate-swipe-pulse {
+  animation: swipePulse 1.5s ease-in-out infinite;
+}
+
+/* Force AOS animations to remain smooth and visible on mobile screens */
+[data-aos] {
+  pointer-events: auto !important;
+}
+
+@media (max-width: 768px) {
+  /* Prevent horizontal scroll overflow & left-side text cutoff caused by AOS translations */
+  [data-aos="fade-left"],
+  [data-aos="fade-right"] {
+    transform: none !important;
+  }
+  [data-aos="fade-up"] {
+    transform: translate3d(0, 15px, 0) !important;
   }
 }
 
@@ -450,16 +517,20 @@
 
 @media (max-width: 480px) {
   .gallery-carousel-wrap {
-    height: 280px;
+    height: 320px;
     border-radius: 12px;
   }
 
   .gallery-carousel-title {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .gallery-carousel-subtitle {
-    display: none;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    opacity: 0.95;
+    margin-bottom: 10px;
+    display: block !important;
   }
 }
 
